@@ -1,0 +1,25 @@
+.fb3d>.settings-left, .fb3d>.settings-right {
+  float: left;
+  box-sizing: border-box;
+}
+
+.fb3d>.settings-left, .fb3d>.settings-right>.content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.fb3d>.settings-left {
+  width: 80%;
+}
+
+.fb3d>.settings-right {
+  width: 20%;
+  padding: 0 15px;
+  min-width: 200px;
+}
+
+.fb3d>.settings-right>.content a {
+  position: relative;
+  top: 5px;
+}

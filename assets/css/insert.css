@@ -1,0 +1,97 @@
+.fb3d .nav {
+  margin-bottom: 15px;
+}
+
+.fb3d .menu-control ul {
+  margin-bottom: 15px;
+}
+
+.fb3d .menu-control select {
+  border: 1px solid #ccc;
+}
+
+.fb3d .paged-container .items {
+  margin-bottom: 15px;
+}
+
+.fb3d .text-center {
+  text-align: center;
+}
+
+.fb3d hr {
+  height: 1px;
+  width: 100%;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+.fb3d .radio label, .fb3d .checkbox label {
+  margin: 0;
+  padding: 0;
+}
+
+.fb3d .form-control {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+.fb3d .book-select .items {
+  overflow-y: scroll;
+  height: 245px;
+}
+
+.fb3d .book-select .post {
+  margin-bottom: 5px;
+}
+
+.mce-container .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.mce-container .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.mce-container .alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.mce-container .alert {
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.05);
+}
+
+.mce-container .alert-danger {
+  background-image: -webkit-linear-gradient(top,#f2dede 0,#e7c3c3 100%);
+  background-image: -o-linear-gradient(top,#f2dede 0,#e7c3c3 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#f2dede),to(#e7c3c3));
+  background-image: linear-gradient(to bottom,#f2dede 0,#e7c3c3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffe7c3c3', GradientType=0);
+  background-repeat: repeat-x;
+  border-color: #dca7a7;
+}
+
+.mce-container .alert-info {
+  background-image: -webkit-linear-gradient(top,#d9edf7 0,#b9def0 100%);
+  background-image: -o-linear-gradient(top,#d9edf7 0,#b9def0 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#d9edf7),to(#b9def0));
+  background-image: linear-gradient(to bottom,#d9edf7 0,#b9def0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffb9def0', GradientType=0);
+  background-repeat: repeat-x;
+  border-color: #9acfea;
+}
+
+.mce-container .alert .fa {
+  vertical-align: baseline;
+  font-family: FontAwesome;
+
+}
