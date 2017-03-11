@@ -81,7 +81,7 @@ body::before {
 
   z-index: -10;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, z-index 0.5s step-end;
 }
 
 .fb3d-modal-shadow::before {
@@ -101,7 +101,7 @@ body::before {
 
   z-index: -9;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, z-index 0.5s step-end;
 }
 
 .fb3d-modal.visible {
