@@ -164,7 +164,7 @@
     $ids = pages2ids($pages);
     $deleted = select_post_pages_by_page_post_ID_and_not_in_page_IDs($page_post_ID, $ids);
     delete_post_pages(pages2ids($deleted));
-    $res = divide_to_updated_and_inserted($pages, $updated);
+    $res = divide_to_updated_and_inserted($pages);
     update_post_pages($res['updated']);
     insert_post_pages($res['inserted']);
   }

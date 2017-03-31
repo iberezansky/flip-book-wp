@@ -13,13 +13,13 @@ var init = function(container) {
           }
           var menu = el.find('.menu');
           if(menu.hasClass('hidden')) {
-            container.find('.fb3d .fnavbar .menu').addClass('hidden');
+            container.find('.ctrl .fnavbar .menu').addClass('hidden');
             menu.removeClass('hidden');
             e.stopPropagation();
           }
         },
         hideDropMenu: function() {
-          container.find('.fb3d .fnavbar .menu').addClass('hidden');
+          container.find('.ctrl .fnavbar .menu').addClass('hidden');
         },
         pickFloatWnd: function(e) {
           if(instance.pos) {
@@ -53,7 +53,7 @@ var init = function(container) {
         }
       },
       dispose: function() {
-        container.find('.fb3d .fnavbar .fnav .toggle').off('click', instance.binds.showDropMenu);
+        container.find('.ctrl .fnavbar .fnav .toggle').off('click', instance.binds.showDropMenu);
         $(container[0].ownerDocument).off('click', instance.binds.hideDropMenu);
 
         $(container[0].ownerDocument).off('mousemove', instance.binds.moveFloatWnd);
@@ -61,7 +61,7 @@ var init = function(container) {
         instance.floatWnd.find('.header').off('mousedown', instance.binds.pickFloatWnd);
       }
     };
-    container.find('.fb3d .fnavbar .fnav .toggle').on('click', instance.binds.showDropMenu);
+    container.find('.ctrl .fnavbar .fnav .toggle').on('click', instance.binds.showDropMenu);
     $(container[0].ownerDocument).on('click', instance.binds.hideDropMenu);
 
     $(container[0].ownerDocument).on('mousemove', instance.binds.moveFloatWnd);
