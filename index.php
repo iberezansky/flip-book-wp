@@ -1,11 +1,11 @@
 <?php
   /*
     Plugin Name: 3D FlipBook - Demo
-    Plugin URI: http://3dflipbook.iberezansky.net
+    Plugin URI: http://3dflipbook.net
     Description: Interactive 3D FlipBook Powered Physics Engine WordPress Plugin
     Author: iberezansky
     Author URI: http://iberezansky.net
-    Version: 1.4
+    Version: 1.7
     License: GPLv2 or later
 
     Text Domain: 3d-flip-book
@@ -22,17 +22,22 @@
     echo get_dump($var);
   }
 
+  $fb3d = [];
+
   function define_tables_names() {
     global $wpdb;
     define('iberezansky\fb3d\TABLE_NAME', $wpdb->prefix.'fb3d_pages');
   }
 
-  define('iberezansky\fb3d\VERSION', '1.0');
-  define('iberezansky\fb3d\DBVERSION', '1.0');
+  define('iberezansky\fb3d\VERSION', '1.6');
+  define('iberezansky\fb3d\DBVERSION', '1.1');
+  define('iberezansky\fb3d\SKINVERSION', '1.0');
   define_tables_names();
   define('iberezansky\fb3d\MAIN', __FILE__);
   define('iberezansky\fb3d\DIR', plugin_dir_path(__FILE__));
+  define('iberezansky\fb3d\DIR_NAME', dirname(plugin_basename(__FILE__)));
   define('iberezansky\fb3d\INC', DIR.'inc/');
+  define('iberezansky\fb3d\TEMPLATES', DIR.'assets/templates/');
   define('iberezansky\fb3d\URL', plugins_url('/', __FILE__));
   define('iberezansky\fb3d\ASSETS', URL.'assets/');
   define('iberezansky\fb3d\ASSETS_JS', ASSETS.'js/');
@@ -50,6 +55,7 @@
   require_once(INC.'post-pages.php');
   require_once(INC.'post.php');
   require_once(INC.'taxonomy.php');
+  require_once(INC.'dictionary.php');
   require_once(INC.'styles.php');
   require_once(INC.'scripts.php');
   require_once(INC.'edit.php');

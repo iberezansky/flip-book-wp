@@ -7,7 +7,7 @@
         'id'=> '0',
         'mode'=> 'fullscreen',
         'title'=> 'false',
-        'template'=> 'short-white-book-view',
+        'template'=> 'default',
         'lightbox'=> 'dark',
         'classes'=> '',
         'urlparam'=> 'fb3d-page'
@@ -16,6 +16,8 @@
     );
 
     $is_link = $atts['mode']=='link-lightbox';
+
+    register_scripts_and_styles();
 
     wp_enqueue_style(POST_ID.'-client');
     wp_enqueue_script(POST_ID.'-'.$atts['mode']);

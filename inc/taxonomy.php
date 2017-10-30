@@ -4,7 +4,7 @@
   function register_taxonomy() {
     \register_taxonomy(POST_ID.'-category', POST_ID, array(
       'hierarchical'=> true,
-      label=> __('Categories'),
+      'label'=> __('Categories', POST_ID),
       'show-ui'=> true
     ));
   }

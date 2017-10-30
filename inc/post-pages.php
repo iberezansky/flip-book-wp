@@ -32,6 +32,7 @@
       'page_source_data'=> ['val'=> [], 'type'=> '%a'],
       'page_thumbnail_type'=> ['val'=> '', 'type'=> '%s'],
       'page_thumbnail_data'=> ['val'=> [], 'type'=> '%a'],
+      'page_meta_data'=> ['val'=> ['css_layer'=> ['css'=> '', 'html'=> '', 'js'=> '']], 'type'=> '%a'],
       'page_number'=> ['val'=> 0, 'type'=> '%d']
     ];
   }
@@ -59,6 +60,22 @@
     return $serialized;
   }
 
+  function stripslashesAray($a) {
+    $res = [];
+    foreach($a as $k=> $v) {
+      if(is_array($v)) {
+        $res[$k] = stripslashesAray($v);
+      }
+      else if(is_string($v)) {
+        $res[$k] = stripslashes($v);
+      }
+      else {
+        $res[$k] = $v;
+      }
+    }
+    return $res;
+  }
+
   function unserialize_page_records($records) {
     $desc = page_description();
     $fields = array_keys($desc);
@@ -66,7 +83,8 @@
     foreach($fields as $name) {
       $d = $desc[$name];
       if($d['type']=='%a') {
-        $unserialized[$name] = unserialize($records[$name]);
+        $un = unserialize($records[$name]);
+        $unserialized[$name] = stripslashesAray($un===false? $d['val']: $un);
       }
       else {
         $unserialized[$name] = $records[$name];
@@ -126,9 +144,28 @@
     return select_post_pages($wpdb->prepare('page_post_ID = %d', $page_post_ID));
   }
 
+  function toSqlList($a) {
+    $a = array_map(function($v) {
+        return "'" . esc_sql($v) . "'";
+    }, $a);
+    $a = implode(',', $a);
+    return '('.$a.')';
+  }
+
+  function select_post_pages_by_page_posts_IDs_in($ids) {
+    return select_post_pages('page_post_ID IN '.toSqlList($ids));
+  }
+
+  function select_post_first_page_by_page_post_IDs_in($ids) {
+    global $wpdb;
+    $res = select_post_pages('page_number = 0 AND page_post_ID IN '.toSqlList($ids));
+    return $res;
+  }
+
   function select_post_first_page_by_page_post_ID($page_post_ID) {
     global $wpdb;
-    return select_post_pages($wpdb->prepare('page_post_ID = %d AND page_number = 0', $page_post_ID))[0];
+    $res = select_post_pages($wpdb->prepare('page_post_ID = %d AND page_number = 0', $page_post_ID));
+    return $res[0];
   }
 
   // function select_post_pages_in_page_IDs($page_IDs) {

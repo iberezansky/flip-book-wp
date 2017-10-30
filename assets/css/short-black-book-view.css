@@ -15,6 +15,7 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  z-index: 1;
 }
 
 #fb3d-ctx.flip-book .view .prev {
@@ -142,12 +143,13 @@
 }
 #fb3d-ctx .ctrl .fnavbar .fnav {
   font-size: 0;
-  display: inline-block;
+  display: flex;
   text-align: left;
 }
 #fb3d-ctx .ctrl .fnavbar .fnav li{
   font-size: 12pt;
   margin: 0;
+  width: auto;
 }
 #fb3d-ctx .ctrl .fnavbar .fnav .fnav-item {
   display: inline-block;
@@ -187,6 +189,10 @@
 #fb3d-ctx .ctrl .fnavbar .fnav .dropdown .menu {
   top: 100%;
   box-shadow: 3px 0 3px #222;
+}
+#fb3d-ctx .ctrl .fnavbar .fnav .icon-caret {
+  width: 26px;
+  display: inline-block;
 }
 #fb3d-ctx .ctrl .fnavbar .fnav .dropdown .caret {
   display: inline-block;
@@ -247,8 +253,8 @@
 }
 
 #fb3d-ctx .ctrl .pages {
-  padding: 0 10px;
-  display: inline-block;
+  padding: 8px 10px;
+  display: flex;
   font-size: 0;
 }
 
@@ -506,4 +512,34 @@
 #fb3d-ctx .ctrl .thumbnails .heading {
   overflow: hidden;
   height: 20px;
+}
+
+
+#fb3d-ctx .ctrl .search .result {
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+#fb3d-ctx .ctrl .search .result:hover {
+  background-color: #444;
+}
+
+#fb3d-ctx .ctrl .search .results a {
+  color: #fff;
+  font-size: 14px;
+}
+
+#fb3d-ctx .ctrl .search .query {
+  padding: 0 10px;
+  padding-bottom: 10px;
+}
+
+#fb3d-ctx .ctrl .search .query input {
+  width: 100%;
+}
+
+#fb3d-ctx .ctrl .search .status {
+  text-align: center;
+  color: #ccc;
+  font-size: 12px;
 }

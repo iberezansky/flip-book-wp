@@ -9,7 +9,7 @@
   function add_details_meta_box() {
     add_meta_box(
       POST_ID.'-details',
-      __('Details'),
+      __('Details', POST_ID),
       '\iberezansky\fb3d\details_metabox_render',
       POST_ID,
       'normal',
@@ -23,6 +23,8 @@
     global $pagenow, $typenow;
 
     if(($pagenow == 'post.php' || $pagenow == 'post-new.php') && $typenow == POST_ID) {
+      register_scripts_and_styles();
+
       wp_enqueue_media();
 
       wp_enqueue_style(POST_ID.'-edit');

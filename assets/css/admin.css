@@ -125,6 +125,12 @@
 }
 
 
+.meta-header {
+  margin-bottom: 10px;
+  font-weight: 900;
+  text-align: center;
+}
+
 .form-group {
   margin-bottom: 25px;
 }
@@ -133,6 +139,10 @@ label {
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: 700;
+}
+
+textarea.form-control {
+  height: 100px;
 }
 
 .form-control {

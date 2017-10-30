@@ -14,6 +14,7 @@
       page_source_data longtext NOT NULL,
       page_thumbnail_type varchar(20) NOT NULL,
       page_thumbnail_data longtext NOT NULL,
+      page_meta_data longtext NOT NULL,
       page_number int(11) NOT NULL,
       PRIMARY KEY  (page_ID),
       KEY page_post_ID (page_post_ID ASC),

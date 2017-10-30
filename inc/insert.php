@@ -22,6 +22,8 @@
     global $pagenow, $typenow;
 
     if(($pagenow == 'post.php' || $pagenow == 'post-new.php') && ($typenow == 'post' || $typenow == 'page')) {
+      register_scripts_and_styles();
+
       wp_enqueue_style(POST_ID.'-insert');
       wp_enqueue_script(POST_ID.'-insert');
     }

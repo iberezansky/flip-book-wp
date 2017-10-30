@@ -44,11 +44,13 @@
   }
 
   function get_post_data($id, $plane) {
-    return plane2struct($plane, [
+    $data = plane2struct($plane, [
       'base'=> [
         '3dfb-post-type'=> ['default'=> 'pdf', 'qualifier'=> '%s'],
         '3dfb-post-data-post_ID'=> ['default'=> 0, 'qualifier'=> '%d'],
         '3dfb-post-data-guid'=> ['default'=> '', 'qualifier'=> '%s'],
+        '3dfb-post-data-pages_customization'=> ['default'=> 'all', 'qualifier'=> '%s'],
+        '3dfb-post-data-pdf_pages'=> ['default'=> 0, 'qualifier'=> '%d'],
         '3dfb-post-thumbnail-type'=> ['default'=> 'auto', 'qualifier'=> '%s'],
         '3dfb-post-thumbnail-data-post_ID'=> ['default'=> 0, 'qualifier'=> '%d'],
 
@@ -60,6 +62,7 @@
         '3dfb-post-props-renderWhileFlipping'=> ['default'=> 'auto', 'qualifier'=> '%d'],
         '3dfb-post-props-pagesForPredicting'=> ['default'=> 'auto', 'qualifier'=> '%d'],
         '3dfb-post-props-preloadPages'=> ['default'=> 'auto', 'qualifier'=> '%d'],
+        '3dfb-post-props-rtl'=> ['default'=> 'auto', 'qualifier'=> '%d'],
 
         '3dfb-post-props-sheet-startVelocity'=> ['default'=> 'auto', 'qualifier'=> '%f'],
         '3dfb-post-props-sheet-cornerDeviation'=> ['default'=> 'auto', 'qualifier'=> '%f'],
@@ -136,11 +139,25 @@
           'qualifier'=> '%s',
           'default'=> ''
         ], [
+          'pattern'=> '/3dfb-pages-\d+-page_meta_data-css_layer-css/',
+          'qualifier'=> '%s',
+          'default'=> ''
+        ], [
+          'pattern'=> '/3dfb-pages-\d+-page_meta_data-css_layer-html/',
+          'qualifier'=> '%s',
+          'default'=> ''
+        ], [
+          'pattern'=> '/3dfb-pages-\d+-page_meta_data-css_layer-js/',
+          'qualifier'=> '%s',
+          'default'=> ''
+        ], [
           'pattern'=> '/3dfb-pages-\d+-page_number/',
           'qualifier'=> '%d',
           'default'=> ''
       ] ]
     ]);
+    $data['3dfb']['pages'] = isset($data['3dfb']['pages'])? $data['3dfb']['pages']: [];
+    return $data;
   }
 
   function props_save($id) {

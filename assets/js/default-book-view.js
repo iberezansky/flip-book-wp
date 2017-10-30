@@ -1,4 +1,4 @@
-var init = function(container) {
+function init(container) {
   var instance;
   if(window.jQuery) {
     var $ = window.jQuery;
@@ -76,4 +76,4 @@ var init = function(container) {
     console.error('jQuery is not found');
   }
   return instance;
-}; init
+} init
