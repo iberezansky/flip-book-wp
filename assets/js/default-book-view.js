@@ -50,7 +50,20 @@ function init(container) {
         },
         dropFloatWnd: function() {
           delete instance.pos;
+        },
+        jsCenter: function() {
+          var ns = container.find('.js-center');
+          for(var i=0; i<ns.length; ++i) {
+            var n = $(ns[i]), parentWidth = $(ns[i].parentNode).width(), width = n.width();
+            n.css('left', 0.5*(parentWidth-width)+'px');
+          }
         }
+      },
+      appLoaded: function() {
+        instance.binds.jsCenter();
+      },
+      linkLoaded: function(link) {
+        instance.binds.jsCenter();
       },
       dispose: function() {
         container.find('.ctrl .fnavbar .fnav .toggle').off('click', instance.binds.showDropMenu);
@@ -59,6 +72,8 @@ function init(container) {
         $(container[0].ownerDocument).off('mousemove', instance.binds.moveFloatWnd);
         $(container[0].ownerDocument).off('mouseup', instance.binds.dropFloatWnd);
         instance.floatWnd.find('.header').off('mousedown', instance.binds.pickFloatWnd);
+
+        $(container[0].ownerDocument.defaultView).off('resize', instance.binds.jsCenter);
       }
     };
     container.find('.ctrl .fnavbar .fnav .toggle').on('click', instance.binds.showDropMenu);
@@ -67,6 +82,9 @@ function init(container) {
     $(container[0].ownerDocument).on('mousemove', instance.binds.moveFloatWnd);
     $(container[0].ownerDocument).on('mouseup', instance.binds.dropFloatWnd);
     instance.floatWnd.find('.header').on('mousedown', instance.binds.pickFloatWnd);
+
+    $(container[0].ownerDocument.defaultView).on('resize', instance.binds.jsCenter);
+    instance.binds.jsCenter();
   }
   else {
     instance = {

@@ -83,6 +83,18 @@
   cursor: default;
 }
 
+#poststuff .tab h2 {
+  font-size: 23px;
+  padding: 0;
+}
+
+.fb3d .loading {
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffe4e1;
+}
+
 .fb3d .color-prop {
   position: relative;
 }

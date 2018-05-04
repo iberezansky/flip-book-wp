@@ -45,6 +45,12 @@
   margin-bottom: 5px;
 }
 
+.fb3d-admin-container {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
 .mce-container .alert {
   padding: 15px;
   margin-bottom: 20px;

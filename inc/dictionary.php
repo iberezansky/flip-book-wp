@@ -1,21 +1,28 @@
 <?php
   namespace iberezansky\fb3d;
 
+  function __($str, $domain) {
+    global $fb3d;
+    return $fb3d['load-keys']? $str: call_user_func('\__', $str, $domain);
+  }
+
   function load_textdomain() {
     global $fb3d;
+    $fb3d['load-keys'] = true;
     $keys = load_dictionary();
+    $fb3d['load-keys'] = false;
     load_plugin_textdomain(POST_ID, false, DIR_NAME.'/languages');
     $values = load_dictionary();
     $l = count($keys);
-    $fb3d['dictionary'] = [];
+    $fb3d['dictionary'] = array();
     for($i=0; $i<$l; ++$i) {
       $fb3d['dictionary'][$keys[$i]] = $values[$i];
     }
   }
-  add_action(__('plugins_loaded', POST_ID), '\iberezansky\fb3d\load_textdomain');
+  add_action('plugins_loaded', '\iberezansky\fb3d\load_textdomain');
 
   function load_dictionary() {
-    return [
+    return array(
       __('auto', POST_ID),
       __('Sorry something went wrong with the server please try again', POST_ID),
       __('General', POST_ID),
@@ -163,7 +170,32 @@
       __('Key down', POST_ID),
       __('Key press', POST_ID),
       __('Key up', POST_ID),
-      __('rtl is a right-to-left, top-to-bottom script, writing starts from the right of the page and continues to the left', POST_ID)
-    ];
+      __('rtl is a right-to-left, top-to-bottom script, writing starts from the right of the page and continues to the left', POST_ID),
+      __('Please wait... the Application is Loading', POST_ID),
+      __('PDF is Loading:', POST_ID),
+      __('Previous page', POST_ID),
+      __('Next page', POST_ID),
+      __('Table of contents', POST_ID),
+      __('Close', POST_ID),
+      __('Bookmarks', POST_ID),
+      __('Thumbnails', POST_ID),
+      __('Search', POST_ID),
+      __('Zoom in', POST_ID),
+      __('Zoom out', POST_ID),
+      __('Fit view', POST_ID),
+      __('10 pages backward', POST_ID),
+      __('10 pages forward', POST_ID),
+      __('Download', POST_ID),
+      __('Print', POST_ID),
+      __('Full screen', POST_ID),
+      __('Settings', POST_ID),
+      __('Smart pan', POST_ID),
+      __('Single page', POST_ID),
+      __('Sounds', POST_ID),
+      __('Stats', POST_ID),
+      __('Increase lighting', POST_ID),
+      __('Reduce lighting', POST_ID),
+      __('Loading...', POST_ID)
+    );
   }
 ?>

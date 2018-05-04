@@ -1,11 +1,11 @@
 <?php
   /*
-    Plugin Name: 3D FlipBook - Demo
+    Plugin Name: 3D FlipBook - Light Edition
     Plugin URI: http://3dflipbook.net
     Description: Interactive 3D FlipBook Powered Physics Engine WordPress Plugin
     Author: iberezansky
     Author URI: http://iberezansky.net
-    Version: 1.7
+    Version: 1.9.7
     License: GPLv2 or later
 
     Text Domain: 3d-flip-book
@@ -22,7 +22,11 @@
     echo get_dump($var);
   }
 
-  $fb3d = [];
+  $fb3d = array(
+    'load-keys'=> false,
+    'dictionary'=> array()
+  );
+
 
   function define_tables_names() {
     global $wpdb;
@@ -45,6 +49,7 @@
   define('iberezansky\fb3d\ASSETS_TEMPLATES', ASSETS.'templates/');
   define('iberezansky\fb3d\ASSETS_IMAGES', ASSETS.'images/');
   define('iberezansky\fb3d\ASSETS_SOUNDS', ASSETS.'sounds/');
+  define('iberezansky\fb3d\ASSETS_CMAPS', ASSETS.'cmaps/');
 
   define('iberezansky\fb3d\POST_ID', '3d-flip-book');
   define('iberezansky\fb3d\META_PREFIX', '3dfb_');
@@ -60,12 +65,12 @@
   require_once(INC.'scripts.php');
   require_once(INC.'edit.php');
   require_once(INC.'insert.php');
-  require_once(INC.'settings.php');
+  require_once(INC.'shortcode-generator.php');
   require_once(INC.'shortcode.php');
   require_once(INC.'ajax-get.php');
   require_once(INC.'ajax-post.php');
 
 //file_put_contents('d:/php.html', get_dump($w));
-//file_put_contents('d:/php.html', get_dump(['post'=>$_POST,'data'=>$data]));
+//file_put_contents('d:/php.html', get_dump(array('post'=>$_POST,'data'=>$data)));
 
 ?>

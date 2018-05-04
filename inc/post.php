@@ -5,6 +5,9 @@
     \register_post_type(POST_ID, array(
       'public'=> true,
       'label'=> __('3D FlipBook', POST_ID),
+      'labels'=> array(
+        'all_items'=> __('All Books', POST_ID),
+      ),
       'menu_icon'=> 'dashicons-book-alt',
       'exclude_from_search'=> true,
       'supports'=> array(

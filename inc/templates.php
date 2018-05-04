@@ -1,78 +1,25 @@
 <?php
   namespace iberezansky\fb3d;
 
-  $fb3d['defaultTemplateUrl'] = admin_url('admin-ajax.php').'?action=fb3d_send_template_html&template='.urlencode(ASSETS_TEMPLATES.'default-book-view.php');
-  $fb3d['templates'] = [
-    'short-white-book-view'=> [
-      'styles'=> [
+  $fb3d['templates'] = array(
+    'short-white-book-view'=> array(
+      'styles'=> array(
         ASSETS_CSS.'short-white-book-view.css'
-      ],
-      'links'=> [
-        [
+      ),
+      'links'=> array(
+        array(
           'rel'=> 'stylesheet',
           'href'=> ASSETS_CSS.'font-awesome.min.css'
-        ]
-      ],
-      'html'=> $fb3d['defaultTemplateUrl'],
+        )
+      ),
+      'html'=> ASSETS_TEMPLATES.'default-book-view.html',
       'script'=> ASSETS_JS.'default-book-view.js',
-      'sounds'=> [
+      'sounds'=> array(
         'startFlip'=> ASSETS_SOUNDS.'start-flip.mp3',
         'endFlip'=> ASSETS_SOUNDS.'end-flip.mp3'
-      ]
-    ],
-    'white-book-view'=> [
-      'styles'=> [
-        ASSETS_CSS.'white-book-view.css'
-      ],
-      'links'=> [
-        [
-          'rel'=> 'stylesheet',
-          'href'=> ASSETS_CSS.'font-awesome.min.css'
-        ]
-      ],
-      'html'=> $fb3d['defaultTemplateUrl'],
-      'script'=> ASSETS_JS.'default-book-view.js',
-      'sounds'=> [
-        'startFlip'=> ASSETS_SOUNDS.'start-flip.mp3',
-        'endFlip'=> ASSETS_SOUNDS.'end-flip.mp3'
-      ]
-    ],
-    'short-black-book-view'=> [
-      'styles'=> [
-        ASSETS_CSS.'short-black-book-view.css'
-      ],
-      'links'=> [
-        [
-          'rel'=> 'stylesheet',
-          'href'=> ASSETS_CSS.'font-awesome.min.css'
-        ]
-      ],
-      'html'=> $fb3d['defaultTemplateUrl'],
-      'script'=> ASSETS_JS.'default-book-view.js',
-      'sounds'=> [
-        'startFlip'=> ASSETS_SOUNDS.'start-flip.mp3',
-        'endFlip'=> ASSETS_SOUNDS.'end-flip.mp3'
-      ]
-    ],
-    'black-book-view'=> [
-      'styles'=> [
-        ASSETS_CSS.'black-book-view.css'
-      ],
-      'links'=> [
-        [
-          'rel'=> 'stylesheet',
-          'href'=> ASSETS_CSS.'font-awesome.min.css'
-        ]
-      ],
-      'html'=> $fb3d['defaultTemplateUrl'],
-      'script'=> ASSETS_JS.'default-book-view.js',
-      'sounds'=> [
-        'startFlip'=> ASSETS_SOUNDS.'start-flip.mp3',
-        'endFlip'=> ASSETS_SOUNDS.'end-flip.mp3'
-      ]
-    ]
-  ];
-
+      )
+    )
+  );
   function import_templates($skins) {
     global $fb3d;
     $fb3d['templates'] = $skins[POST_ID]['skins'];
@@ -82,49 +29,49 @@
 
   function export_templates($skins) {
     global $fb3d;
-    $skins[POST_ID] = [
+    $skins[POST_ID] = array(
       'skins'=> $fb3d['templates'],
       'version'=> SKINVERSION,
       'name'=> __('3D FlipBook'),
-      'description'=> [
-        'caption'=> [
+      'description'=> array(
+        'caption'=> array(
           'type'=> 'text',
           'required'=> false
-        ],
-        'styles'=> [
+        ),
+        'styles'=> array(
           'type'=> 'file',
           'ext'=> 'css',
           'number'=> 'inf',
           'required'=> false
-        ],
-        'links'=> [
+        ),
+        'links'=> array(
           'type'=> 'links',
           'number'=> 'inf',
           'required'=> false
-        ],
-        'html'=> [
+        ),
+        'html'=> array(
           'type'=> 'file',
           'ext'=> 'php',
           'number'=> 'one',
           'required'=> true
-        ],
-        'script'=> [
+        ),
+        'script'=> array(
           'type'=> 'file',
           'ext'=> 'js',
           'number'=> 'one',
           'required'=> false
-        ],
-        'sounds'=> [
+        ),
+        'sounds'=> array(
           'type'=> 'file',
           'ext'=> 'mp3',
-          'number'=> [
+          'number'=> array(
             'startFlip',
             'endFlip'
-          ],
+          ),
           'required'=> false
-        ]
-      ]
-    ];
+        )
+      )
+    );
     return $skins;
   }
 
