@@ -53,6 +53,8 @@
         '3dfb-post-data-pdf_pages'=> array('default'=> 0, 'qualifier'=> '%d'),
         '3dfb-post-thumbnail-type'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-thumbnail-data-post_ID'=> array('default'=> 0, 'qualifier'=> '%d'),
+        '3dfb-post-ready_function'=> array('default'=> '', 'qualifier'=> '%s'),
+        '3dfb-post-book_style'=> array('default'=> 'volume', 'qualifier'=> '%s'),
 
         '3dfb-post-props-height'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-width'=> array('default'=> 'auto', 'qualifier'=> '%f'),
@@ -74,6 +76,7 @@
         '3dfb-post-props-sheet-widthTexels'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-sheet-heightTexels'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-sheet-color'=> array('default'=> 'auto', 'qualifier'=> '%f'),
+        '3dfb-post-props-sheet-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
 
         '3dfb-post-props-cover-startVelocity'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-cover-flexibility'=> array('default'=> 'auto', 'qualifier'=> '%f'),
@@ -87,6 +90,7 @@
         '3dfb-post-props-cover-padding'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-cover-binderTexture'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-cover-mass'=> array('default'=> 'auto', 'qualifier'=> '%f'),
+        '3dfb-post-props-cover-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
 
         '3dfb-post-props-page-startVelocity'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-page-flexibility'=> array('default'=> 'auto', 'qualifier'=> '%f'),
@@ -98,11 +102,17 @@
         '3dfb-post-props-page-color'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-page-depth'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-page-mass'=> array('default'=> 'auto', 'qualifier'=> '%f'),
+        '3dfb-post-props-page-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
 
         '3dfb-post-controlProps-actions-cmdSave-enabled'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-controlProps-actions-cmdSave-enabledInNarrow'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-controlProps-actions-cmdPrint-enabled'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-controlProps-actions-cmdPrint-enabledInNarrow'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-controlProps-actions-cmdSinglePage-enabled'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-controlProps-actions-cmdSinglePage-enabledInNarrow'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-controlProps-actions-cmdSinglePage-active'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+
+        '3dfb-autoThumbnail'=> array('default'=> '', 'qualifier'=> '%s'),
       ),
       'regs'=> array( array(
           'pattern'=> '/3dfb-pages-\d+-page_ID/',
@@ -166,6 +176,34 @@
     return $data;
   }
 
+  function get_auto_thumbnail_url($id) {
+    $r = NULL;
+    if(file_exists(get_auto_thumbnail_dir().'/'.$id.'.png')) {
+      $dir = wp_upload_dir();
+      $r = $dir['baseurl'].'/'.POST_ID.'/auto-thumbnails/'.$id.'.png';
+    }
+    return $r;
+  }
+
+  function get_auto_thumbnail_dir() {
+    $dir = wp_upload_dir();
+    return $dir['basedir'].'/'.POST_ID.'/auto-thumbnails';
+  }
+
+  function post_auto_thumbnail_save($id, $b64) {
+    $dir = get_auto_thumbnail_dir();
+    $fn = $dir.'/'.$id.'.png';
+    if($b64!=='') {
+      if(!file_exists($dir)) {
+        mkdir($dir, 0777, TRUE);
+      }
+      file_put_contents($fn, base64_decode($b64));
+    }
+    else if(file_exists($fn)){
+      unlink($fn);
+    }
+  }
+
   function props_save($id) {
     $autosave = wp_is_post_autosave($id);
     $revision = wp_is_post_revision($id);
@@ -178,6 +216,8 @@
       }
 
       set_post_pages($id, $data['3dfb']['pages']);
+
+      post_auto_thumbnail_save($id, $data['3dfb']['autoThumbnail']);
     }
   }
 

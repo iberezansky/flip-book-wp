@@ -3,7 +3,7 @@
 
   function __($str, $domain) {
     global $fb3d;
-    return $fb3d['load-keys']? $str: call_user_func('\__', $str, $domain);
+    return isset($fb3d['load-keys'])&&$fb3d['load-keys']? $str: call_user_func('\__', $str, $domain);
   }
 
   function load_textdomain() {
@@ -195,7 +195,8 @@
       __('Stats', POST_ID),
       __('Increase lighting', POST_ID),
       __('Reduce lighting', POST_ID),
-      __('Loading...', POST_ID)
+      __('Loading...', POST_ID),
+      __('See the debugging console for details (Ctrl+Shift+I in Chrome).', POST_ID)
     );
   }
 ?>

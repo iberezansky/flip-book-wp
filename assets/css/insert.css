@@ -51,6 +51,15 @@
   border: 1px solid #ddd;
 }
 
+.mce-container .fb3d .pagination {
+  margin: 8px 0;
+}
+.mce-container .fb3d .form-control {
+  width: 94%;
+  height: auto;
+  line-height: normal;
+}
+
 .mce-container .alert {
   padding: 15px;
   margin-bottom: 20px;

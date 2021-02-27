@@ -1,11 +1,11 @@
 <?php
   /*
-    Plugin Name: 3D FlipBook - Light Edition
-    Plugin URI: http://3dflipbook.net
-    Description: Interactive 3D FlipBook Powered Physics Engine WordPress Plugin
+    Plugin Name: 3D FlipBook - Lite Edition
+    Plugin URI: http://3dflipbook.net/
+    Description: Interactive 3D FlipBook Powered Physics Engine WordPress Plugin  <a href="http://3dflipbook.net/download-wp"><strong>Go Pro</strong></a>
     Author: iberezansky
-    Author URI: http://iberezansky.net
-    Version: 1.9.7
+    Author URI: http://3dflipbook.net/
+    Version: 1.10.15
     License: GPLv2 or later
 
     Text Domain: 3d-flip-book
@@ -22,9 +22,19 @@
     echo get_dump($var);
   }
 
+  function aa($a, $n, $v=[]) {
+    return isset($a[$n])? $a[$n]: $v;
+  }
+
   $fb3d = array(
     'load-keys'=> false,
-    'dictionary'=> array()
+    'dictionary'=> [],
+    'jsData'=> [
+      'urls'=> [],
+      'posts'=> ['ids_mis'=> [], 'ids'=> []],
+      'pages'=> [],
+      'firstPages'=> []
+      ]
   );
 
 
@@ -33,9 +43,24 @@
     define('iberezansky\fb3d\TABLE_NAME', $wpdb->prefix.'fb3d_pages');
   }
 
-  define('iberezansky\fb3d\VERSION', '1.6');
+  function fetch_options() {
+    global $fb3d;
+    $fb3d['options'] = get_option(META_PREFIX.'options');
+    $fb3d['options'] = unserialize($fb3d['options']);
+    $fb3d['options'] = $fb3d['options']? $fb3d['options']: [
+      'questions'=> []
+    ];
+  }
+
+  function push_options() {
+    global $fb3d;
+    update_option(META_PREFIX.'options', serialize($fb3d['options']));
+  }
+
+  define('iberezansky\fb3d\VERSION', '1.10.15');
   define('iberezansky\fb3d\DBVERSION', '1.1');
   define('iberezansky\fb3d\SKINVERSION', '1.0');
+  define('DTM_FORMAT', 'Y-m-d H:i:s');
   define_tables_names();
   define('iberezansky\fb3d\MAIN', __FILE__);
   define('iberezansky\fb3d\DIR', plugin_dir_path(__FILE__));
@@ -53,6 +78,7 @@
 
   define('iberezansky\fb3d\POST_ID', '3d-flip-book');
   define('iberezansky\fb3d\META_PREFIX', '3dfb_');
+  fetch_options();
 
   require_once(INC.'codes.php');
   require_once(INC.'templates.php');
@@ -69,6 +95,7 @@
   require_once(INC.'shortcode.php');
   require_once(INC.'ajax-get.php');
   require_once(INC.'ajax-post.php');
+  require_once(INC.'question.php');
 
 //file_put_contents('d:/php.html', get_dump($w));
 //file_put_contents('d:/php.html', get_dump(array('post'=>$_POST,'data'=>$data)));

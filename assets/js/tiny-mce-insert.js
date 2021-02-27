@@ -1,10 +1,15 @@
 
 tinymce.PluginManager.add('3dfbInsert', function(editor) {
+	if(!window.FB3D_MCE_LOCALE) {
+		window.FB3D_MCE_LOCALE = {
+			key: '3d-flip-book'
+		}
+	}
 
 	function showDialog() {
-		var shortCode, insert;
+		var shortCode, insert, time=0;
 		function loadInsertApp() {
-      if(fb3dCreateInsertApp) {
+      if(window.fb3dCreateInsertApp) {
 				var instance, win = editor.windowManager.open({
 					title: "3D FlipBook",
 					spacing: 10,
@@ -12,7 +17,7 @@ tinymce.PluginManager.add('3dfbInsert', function(editor) {
 					items: [
 						{
 							minWidth: 450,
-							minHeight: 400,
+							minHeight: 450,
 							type: 'container',
 							html: '<div id="3dfb-insert">Mount node</div>'
 						},
@@ -28,8 +33,8 @@ tinymce.PluginManager.add('3dfbInsert', function(editor) {
 						onclick: function() {
 							var newShortCode = instance.getShortCode();
 							if(newShortCode!=='') {
-								insert(newShortCode);
 								win.close();
+								insert(newShortCode);
 							}
 							else {
 								editor.windowManager.alert('Select a 3D FlipBook');
@@ -58,17 +63,14 @@ tinymce.PluginManager.add('3dfbInsert', function(editor) {
 			if(~p && text.lastIndexOf(']',sel.focusOffset)<p && text.substr(p).match(/\[.*?\]/)) {
 				var startText = text.substr(0, p);
 				text = text.substr(p);
-				var regex = new RegExp(['\\[',FB3D_MCE_LOCALE.key,'.*?\\]'].join(''), 'm'), matchs = regex.exec(text);
+				var regex = new RegExp(['\\[',FB3D_MCE_LOCALE.key,'.*?\\[/', FB3D_MCE_LOCALE.key, '\\]'].join(''), 'm'), matchs = regex.exec(text);
+				if(!matchs) {
+					regex = new RegExp(['\\[',FB3D_MCE_LOCALE.key,'.*?\\]'].join(''), 'm');
+					matchs = regex.exec(text);
+				}
 				if(matchs && text.indexOf(matchs[0])===0) {
 					shortCode = matchs[0];
 					var offset = sel.focusOffset, node = sel.focusNode;
-					if(shortCode.match(/mode\s*=\s*['"]{0,1}link-lightbox['"]{0,1}/)) {
-						regex = new RegExp(['\\[',FB3D_MCE_LOCALE.key,'.*?\\[/', FB3D_MCE_LOCALE.key, '\\]'].join(''), 'm');
-						matchs = regex.exec(text);
-						if(matchs) {
-							shortCode = matchs[0];
-						}
-					}
 					insert = function(newShortCode) {
 						node.nodeValue = startText+text.replace(shortCode, newShortCode);
 						sel.collapse(node, Math.min(offset, startText.length+newShortCode.length));

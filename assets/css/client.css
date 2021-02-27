@@ -15,12 +15,137 @@
   border-color: #ebccd1;
 }
 
-.fb3d-fs-dark .fullscreen {
+.fb3d-button {
+  display: inline-block;
+  font-size: 13px;
+  margin: 0;
+  cursor: pointer;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  min-height: 32px;
+  line-height: 2.30769231;
+  padding: 0 12px;
+
+  color: #fff;
+  background: #007cba;
+  border-color: #007cba;
+
+  text-decoration: none;
+  text-shadow: none;
+}
+
+a.fb3d-button, a.fb3d-button:visited {
+  color: #fff;
+}
+
+.fb3d-button:focus,
+.fb3d-button:hover {
+	background: #0071a1;
+	border-color: #0071a1;
+	color: #fff
+}
+
+.fb3d-button:focus {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #007cba
+}
+
+.fb3d-button:active {
+	background: #00669b;
+	border-color: #00669b;
+	box-shadow: none;
+	color: #fff
+}
+
+.fb3d-thumbnail-lightbox-mode, .fb3d-thumbnail-mode {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+._3d-flip-book .book-thumbnail {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  display: inline-block;
+  transition: box-shadow .25s ease-in-out;
+}
+
+._3d-flip-book:hover .book-thumbnail {
+  box-shadow: 0 0 7px rgba(0,0,0,0.5);
+}
+
+._3d-flip-book:active .book-thumbnail {
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  transition: box-shadow .15s ease-in-out;
+}
+
+._3d-flip-book .book-thumbnail img {
+  border-radius: 0;
+  transform-origin: left;
+  transition: transform .25s;
+}
+
+._3d-flip-book:hover .book-thumbnail img {
+  transform: rotateY(-20deg);
+}
+
+._3d-flip-book:active .book-thumbnail img {
+  transform: rotateY(-17deg);
+  transition: transform .15s;
+}
+
+.fb3d-thumbnail-lightbox-mode .book-heading, .fb3d-thumbnail-mode .book-heading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fb3d-thumbnail-lightbox-mode .book-heading h3, .fb3d-thumbnail-mode .book-heading h3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 120%;
+  color: #fff;
+  text-decoration: none;
+  z-index: 1;
+  background: rgba(60, 60, 60, 0.8);
+  bottom: -100%;
+  transition: bottom .3s ease .2s;
+}
+
+.fb3d-thumbnail-lightbox-mode:hover .book-heading h3, .fb3d-thumbnail-mode:hover .book-heading h3 {
+  bottom: 5px;
+  transition-delay: 0s;
+}
+
+._3d-flip-book.fb3d-fix-title .book-heading h3 {
+  bottom: 5px;
+}
+
+.fb3d-thumbnail-lightbox-mode .book-heading h3 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+._3d-flip-book.fb3d-fs-dark .fullscreen {
   background-image: url('../images/texture.jpg');
 }
 
-.fb3d-fs-light .fullscreen {
+._3d-flip-book.fb3d-fs-light .fullscreen {
   background-image: url('../images/inverse-texture.jpg');
+}
+
+._3d-flip-book .fullscreen {
+  background-image: url('../images/texture.jpg');
 }
 
 .fb3d-h-100 {
@@ -67,7 +192,7 @@
 /*Lightbox Effect*/
 
 .fb3d-modal-shadow {
-
+  overflow: hidden;
 }
 
 body::before {
@@ -85,7 +210,7 @@ body::before {
 }
 
 .fb3d-modal-shadow::before {
-  z-index: 50000;
+  z-index: 500000;
   opacity: 0.5;
   transition: opacity 0.5s;
 }
@@ -94,9 +219,8 @@ body::before {
   position: fixed;
   width: 95%;
   height: 95%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: calc(5vw / 2);
+  top: calc(5vh / 2);
   box-shadow: 0 0 5px #fff;
 
   z-index: -9;
@@ -105,7 +229,7 @@ body::before {
 }
 
 .fb3d-modal.visible {
-  z-index: 50001;
+  z-index: 500001;
   opacity: 1;
   transition: opacity 0.5s;
 }
@@ -158,6 +282,23 @@ body::before {
   font-size: 14pt;
   padding-top: 2px;
   padding-right: 2px;
+}
+
+.fb3d-modal.dark-shadow {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  box-shadow: none;
+
+}
+
+.fb3d-modal.dark-shadow::before {
+  background-color: #000;
+}
+
+.dark-shadow .mount-container.fullscreen {
+  background-image: url('../images/texture.jpg');
 }
 
 .light .mount-container.fullscreen {

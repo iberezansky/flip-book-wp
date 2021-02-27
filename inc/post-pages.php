@@ -1,14 +1,6 @@
 <?php
   namespace iberezansky\fb3d;
 
-  function a2sql_list($array) {
-    $r='';
-    foreach($array as $val) {
-      $r = $r.($r? ',': '').intval($val);
-    }
-    return "($r)";
-  }
-
   function is_page_ID($page_ID) {
     return isset($page_ID) && $page_ID!=0;
   }
@@ -103,7 +95,7 @@
     $wpdb->query(sprintf("
       DELETE FROM $table
 		  WHERE page_ID IN %s
-    ", a2sql_list($ids)));
+    ", a_to_sql_list($ids)));
   }
 
   function insert_post_pages($pages) {
@@ -144,39 +136,39 @@
     return select_post_pages($wpdb->prepare('page_post_ID = %d', $page_post_ID));
   }
 
-  function toSqlList($a) {
+  function a_to_sql_list($a) {
     $a = array_map(function($v) {
         return "'" . esc_sql($v) . "'";
     }, $a);
     $a = implode(',', $a);
-    return '('.$a.')';
+    return '('.($a===''? "'0'": $a).')';
   }
 
   function select_post_pages_by_page_posts_IDs_in($ids) {
-    return select_post_pages('page_post_ID IN '.toSqlList($ids));
+    return select_post_pages('page_post_ID IN '.a_to_sql_list($ids));
   }
 
   function select_post_first_page_by_page_post_IDs_in($ids) {
     global $wpdb;
-    $res = select_post_pages('page_number = 0 AND page_post_ID IN '.toSqlList($ids));
+    $res = select_post_pages('page_number = 0 AND page_post_ID IN '.a_to_sql_list($ids));
     return $res;
   }
 
   function select_post_first_page_by_page_post_ID($page_post_ID) {
     global $wpdb;
     $res = select_post_pages($wpdb->prepare('page_post_ID = %d AND page_number = 0', $page_post_ID));
-    return $res[0];
+    return isset($res[0])? $res[0]: NULL;
   }
 
   // function select_post_pages_in_page_IDs($page_IDs) {
   //   global $wpdb;
-  //   return select_post_pages($wpdb->prepare('page_ID IN %s', a2sql_list($page_IDs)));
+  //   return select_post_pages($wpdb->prepare('page_ID IN %s', a_to_sql_list($page_IDs)));
   // }
 
   function select_post_pages_by_page_post_ID_and_not_in_page_IDs($page_post_ID, $page_IDs) {
     global $wpdb;
     if(count($page_IDs)) {
-      $q = sprintf('page_post_ID = %d AND page_ID NOT IN %s', $page_post_ID, a2sql_list($page_IDs));
+      $q = sprintf('page_post_ID = %d AND page_ID NOT IN %s', $page_post_ID, a_to_sql_list($page_IDs));
     }
     else {
       $q = sprintf('page_post_ID = %d', $page_post_ID);

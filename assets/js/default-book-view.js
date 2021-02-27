@@ -52,11 +52,16 @@ function init(container) {
           delete instance.pos;
         },
         jsCenter: function() {
-          var ns = container.find('.js-center');
-          for(var i=0; i<ns.length; ++i) {
-            var n = $(ns[i]), parentWidth = $(ns[i].parentNode).width(), width = n.width();
-            n.css('left', 0.5*(parentWidth-width)+'px');
-          }
+          var fn = function() {
+            var ns = container.find('.js-center');
+            ns.removeClass('css-center');
+            for(var i=0; i<ns.length; ++i) {
+              var n = $(ns[i]), parentWidth = $(ns[i].parentNode).width(), width = n.width();
+              n.css('left', 0.5*(parentWidth-width)+'px');
+            }
+          };
+          fn();
+          setTimeout(fn, 100);
         }
       },
       appLoaded: function() {

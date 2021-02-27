@@ -26,6 +26,9 @@
     dbDelta($sql);
 
     add_option($table.'_version', DBVERSION);
+
+    register_post_type();
+    flush_rewrite_rules(false);
   }
 
   register_activation_hook(MAIN, '\iberezansky\fb3d\install');
